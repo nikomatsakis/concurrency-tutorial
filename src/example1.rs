@@ -1,6 +1,10 @@
 use std::collections::HashMap;
 use std::f32::INFINITY;
 
+struct ShoppingList {
+    items: Vec<String>,
+}
+
 struct Store {
     name: String,
     prices: HashMap<String, f32>,
@@ -47,17 +51,26 @@ fn build_stores() -> Vec<Store> {
     stores
 }
 
-fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
+fn find_best_store(stores: Vec<Store>, shopping_list: &ShoppingList) -> String {
+    let threads = stores.into_iter()
+                        .map(|store| {
+                            let shopping_list = shopping_list.clone();
+                            thread::spawn(move || {
+                                shopping_list.items.iter()
+                                                   .map(|item_name| store.price(item_name))
+                                                   .fold(0.0, |v, u| v + u)
+                            })
+                        })
+                        .collect();
+
     // EXERCISE 0
     assert!(stores.len() > 0);
     let mut best = None;
     let mut best_price = INFINITY;
     for store in stores {
-        let sum = shopping_list.items.iter()
-                                     .map(|item_name| store.price(item_name))
-                                     .fold(0.0, |v, u| v + u);
+        let sum = 
         if sum < best_price {
-            best = Some(store.name);
+            best = Some(store);
             best_price = sum;
         }
     }
@@ -65,11 +78,14 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
 }
 
 pub fn main() {
-    let shopping_list = vec![format!("chocolate"),
-                             format!("doll"),
-                             format!("bike")];
+    let shopping_list = ShoppingList {
+        items: vec![format!("chocolate"),
+                    format!("doll"),
+                    format!("bike")]
+    };
+
     let stores = build_stores();
-    let best_store = find_best_store(stores, &shopping_list);
-    println!("Best store: {}", best_store);
+    let store = find_best_store(&stores, &shopping_list);
+    println!("Best store: {}", store.name);
 }
 
