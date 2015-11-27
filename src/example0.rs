@@ -5,14 +5,6 @@ struct ShoppingList {
     items: Vec<String>,
 }
 
-impl ShoppingList {
-    fn new(items: Vec<String>) -> ShoppingList {
-        ShoppingList {
-            items: items
-        }
-    }
-}
-
 struct Store {
     name: String,
     prices: HashMap<String, f32>,
@@ -53,13 +45,14 @@ fn build_stores() -> Vec<Store> {
     let mut store = Store::new(format!("Woolmart"));
     store.add_item(format!("chocolate"), 2.0);
     store.add_item(format!("doll"), 23.0);
-    store.add_item(format!("bike"), 145.0);
+    store.add_item(format!("bike"), 146.0);
     stores.push(store);
 
     stores
 }
 
 fn find_best_store<'a>(stores: &'a [Store], shopping_list: &ShoppingList) -> &'a Store {
+    assert!(stores.len() > 0);
     let mut best = None;
     let mut best_price = INFINITY;
     for store in stores {
@@ -71,7 +64,7 @@ fn find_best_store<'a>(stores: &'a [Store], shopping_list: &ShoppingList) -> &'a
             best_price = sum;
         }
     }
-    best.unwrap()
+    best.unwrap() // there will always be at least one store
 }
 
 fn main() {
