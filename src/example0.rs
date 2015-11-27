@@ -53,9 +53,9 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
     let mut best = None;
     let mut best_price = INFINITY;
     for store in stores {
-        let sum = shopping_list.items.iter()
-                                     .map(|item_name| store.price(item_name))
-                                     .fold(0.0, |v, u| v + u);
+        let sum = shopping_list.iter()
+                               .map(|item_name| store.price(item_name))
+                               .fold(0.0, |v, u| v + u);
         if sum < best_price {
             best = Some(store.name);
             best_price = sum;
