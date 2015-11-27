@@ -1,9 +1,6 @@
 use std::collections::HashMap;
 use std::f32::INFINITY;
-
-struct ShoppingList {
-    items: Vec<String>,
-}
+use std::thread;
 
 struct Store {
     name: String,
@@ -51,41 +48,39 @@ fn build_stores() -> Vec<Store> {
     stores
 }
 
-fn find_best_store(stores: Vec<Store>, shopping_list: &ShoppingList) -> String {
-    let threads = stores.into_iter()
-                        .map(|store| {
-                            let shopping_list = shopping_list.clone();
-                            thread::spawn(move || {
-                                shopping_list.items.iter()
-                                                   .map(|item_name| store.price(item_name))
-                                                   .fold(0.0, |v, u| v + u)
-                            })
-                        })
-                        .collect();
+fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
+    let threads: Vec<_> =
+        stores.into_iter()
+              .map(|store| {
+                  let shopping_list = shopping_list.clone();
+                  thread::spawn(move || {
+                      let sum = shopping_list.iter()
+                                             .map(|item_name| store.price(item_name))
+                                             .fold(0.0, |v, u| v + u);
+                      (store.name, sum)
+                  })
+              })
+              .collect();
 
-    // EXERCISE 0
-    assert!(stores.len() > 0);
     let mut best = None;
     let mut best_price = INFINITY;
-    for store in stores {
-        let sum = 
+    for thread in threads {
+        let (name, sum) = thread.join().unwrap(); // propoagate panics
         if sum < best_price {
-            best = Some(store);
+            best = Some(name);
             best_price = sum;
         }
     }
-    best.unwrap() // there will always be at least one store
+    best.unwrap()
 }
 
 pub fn main() {
-    let shopping_list = ShoppingList {
-        items: vec![format!("chocolate"),
-                    format!("doll"),
-                    format!("bike")]
-    };
+    let shopping_list = vec![format!("chocolate"),
+                             format!("doll"),
+                             format!("bike")];
 
     let stores = build_stores();
-    let store = find_best_store(&stores, &shopping_list);
-    println!("Best store: {}", store.name);
+    let best_store = find_best_store(stores, &shopping_list);
+    println!("Best store: {}", best_store);
 }
 
