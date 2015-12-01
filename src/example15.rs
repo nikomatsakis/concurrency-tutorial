@@ -50,17 +50,22 @@ fn build_stores() -> Vec<Store> {
 }
 
 fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
+    assert!(stores.len() > 0);
+    let mut best = None;
+    let mut best_price = INFINITY;
     for store in stores {
-        println!("Store: {}", store.name);
+        let name = store.name.clone();
         let shopping_list = shopping_list.clone();
         let handle = thread::spawn(move || {
             compute_sum(&store, &shopping_list)
         });
         let sum = handle.join().unwrap();
-        println!("Sum: {}", sum);
+        if sum < best_price {
+            best = Some(store.name);
+            best_price = sum;
+        }
     }
-
-    format!("foo")
+    best.unwrap() // there will always be at least one store
 }
 
 fn compute_sum(store: &Store, shopping_list: &Vec<String>) -> f32 {

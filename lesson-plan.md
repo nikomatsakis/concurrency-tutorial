@@ -28,3 +28,6 @@
   - show `let x = None` and unwrap
 - Sequential search
   - 10 minutes, wonder about
+- Parallel search
+  - explain example15.rs
+  - cover why we have to clone the shopping list
