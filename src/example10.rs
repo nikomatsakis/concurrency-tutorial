@@ -49,6 +49,8 @@ fn build_stores() -> Vec<Store> {
 
 fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
     // EXERCISE 0
+    //
+    // Find the store with the best price and return its name.
     assert!(stores.len() > 0);
     let mut best = None;
     let mut best_price = INFINITY;

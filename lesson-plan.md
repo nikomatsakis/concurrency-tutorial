@@ -1,0 +1,25 @@
+- Intro slide
+- Hello, World Example
+    - Explain:
+        - `fn` declaration
+        - `println` is a macro
+    - Format strings in `println!`
+        - `println("Hello, {}!", world);`
+        - also show `{:?}`
+    - Move "world" into a local variable so we can change it
+        - `let name = "Rustacean"; println("Hello, {}!", name);`
+    - Abstract into a helper fn
+        - `fn greet(name: String) { println("Hello, {}!", name); }`
+        - What goes wrong?
+            - Explain `format!`, show how you can use same helpers
+            - Explain `push_str` and mutable local variables
+                - `let mut name = format!("fellow "); name.push_str("Rustacean");`
+    - Call helper fn twice
+        - What goes wrong now?
+- Ownership slides
+- Borrowing slides
+- Borrowing example
+    - Show that `&` and `&mut` cannot overlap
+    - Time-limited
+- For loops
+  - show that `s` has type `String`
