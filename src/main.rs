@@ -4,6 +4,7 @@ mod example02;
 mod example03;
 mod example10;
 mod example20;
+mod example20sol;
 mod example30;
 mod example40;
 
@@ -25,6 +26,7 @@ fn main() {
 
     println!("----------------------------------------------------------------------");
     example20::main();
+    example20sol::main();
 
     println!("----------------------------------------------------------------------");
     example30::main();
