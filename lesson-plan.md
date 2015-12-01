@@ -23,3 +23,8 @@
     - Time-limited
 - For loops
   - show that `s` has type `String`
+- Options and enums
+  - explain about `unwrap` and how it is risky
+  - show `let x = None` and unwrap
+- Sequential search
+  - 10 minutes, wonder about

@@ -55,15 +55,19 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
     let mut best = None;
     let mut best_price = INFINITY;
     for store in stores {
-        let sum = shopping_list.iter()
-                               .map(|item_name| store.price(item_name))
-                               .fold(0.0, |v, u| v + u);
+        let sum = compute_sum(&store, shopping_list);
         if sum < best_price {
             best = Some(store.name);
             best_price = sum;
         }
     }
     best.unwrap() // there will always be at least one store
+}
+
+fn compute_sum(store: &Store, shopping_list: &Vec<String>) -> f32 {
+    shopping_list.iter()
+                 .map(|item_name| store.price(item_name))
+                 .fold(0.0, |v, u| v + u)
 }
 
 pub fn main() {
