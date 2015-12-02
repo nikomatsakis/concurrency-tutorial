@@ -5,7 +5,8 @@ mod example03;
 mod example_sequential_search;
 mod example_parallel_search;
 mod example_parallel_search_sol;
-mod example_port;
+mod example_channels;
+mod example_channels_sol;
 mod example_actor;
 mod example_shared_memory;
 mod example_mutex;
@@ -31,7 +32,8 @@ fn main() {
     example_parallel_search_sol::main();
 
     println!("----------------------------------------------------------------------");
-    example_port::main();
+    // example_channels::main(); // not expected to execute
+    example_channels_sol::main();
 
     println!("----------------------------------------------------------------------");
     example_actor::main();

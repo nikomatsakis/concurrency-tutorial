@@ -2,6 +2,7 @@
 
 use std::collections::HashMap;
 use std::f32::INFINITY;
+use std::mem;
 use std::sync::mpsc::channel;
 use std::thread;
 
@@ -55,7 +56,6 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
     assert!(stores.len() > 0);
 
     let (tx, rx) = channel();
-    let count = stores.len();
     for store in stores {
         let shopping_list = shopping_list.clone();
         let tx = tx.clone();
@@ -64,11 +64,11 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
             tx.send((sum, store.name)).unwrap();
         });
     }
+    mem::drop(tx);
 
     let mut best = None;
     let mut best_price = INFINITY;
-    for _ in 0 .. count {
-        let (sum, name) = rx.recv().unwrap();
+    for (sum, name) in rx {
         if sum < best_price {
             best = Some(name);
             best_price = sum;
