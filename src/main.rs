@@ -2,11 +2,13 @@ mod example00;
 mod example01;
 mod example02;
 mod example03;
-mod example10;
-mod example20;
-mod example20sol;
-mod example30;
-mod example40;
+mod example_sequential_search;
+mod example_parallel_search;
+mod example_parallel_search_sol;
+mod example_port;
+mod example_actor;
+mod example_shared_memory;
+mod example_mutex;
 
 fn main() {
     println!("----------------------------------------------------------------------");
@@ -22,15 +24,21 @@ fn main() {
     example03::main();
 
     println!("----------------------------------------------------------------------");
-    example10::main();
+    example_sequential_search::main();
 
     println!("----------------------------------------------------------------------");
-    example20::main();
-    example20sol::main();
+    example_parallel_search::main();
+    example_parallel_search_sol::main();
 
     println!("----------------------------------------------------------------------");
-    example30::main();
+    example_port::main();
 
     println!("----------------------------------------------------------------------");
-    example40::main();
+    example_actor::main();
+
+    println!("----------------------------------------------------------------------");
+    example_shared_memory::main();
+
+    println!("----------------------------------------------------------------------");
+    example_mutex::main();
 }
