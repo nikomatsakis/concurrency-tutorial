@@ -24,3 +24,7 @@
 - [Introduce mutex](src/mutex.rs):
     - Goal: Adapt your previous code to introduce a mutex and use it to find the best price
     - Time: 10 minutes
+
+Thank you for coming to the tutorial! Before you go, please let me
+know what you thought at
+[this Google form](http://goo.gl/forms/CN4trE3rXe).

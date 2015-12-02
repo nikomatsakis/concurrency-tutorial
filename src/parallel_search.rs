@@ -11,10 +11,10 @@ struct Store {
 
 impl Store {
     fn new(name: String) -> Store {
-    Store {
-        name: name,
-        prices: HashMap::new(),
-    }
+        Store {
+            name: name,
+            prices: HashMap::new(),
+        }
     }
 
     fn add_item(&mut self, name: String, price: f32) {
@@ -55,8 +55,8 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
     let mut best = None;
     let mut best_price = INFINITY;
     for store in stores {
-        let name = store.name.clone();
         let shopping_list = shopping_list.clone();
+        let name = store.name.clone();
         let handle = thread::spawn(move || {
             compute_sum(&store, &shopping_list)
         });

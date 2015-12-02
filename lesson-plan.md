@@ -26,8 +26,27 @@
 - Options and enums
   - explain about `unwrap` and how it is risky
   - show `let x = None` and unwrap
+  - modify to some other example, like Shape / Square / Circle
 - Sequential search
   - 10 minutes, wonder about
 - Parallel search
-  - explain example15.rs
-  - cover why we have to clone the shopping list
+  - note the `use` statement
+  - let's look at these two curious clones:
+    - we'll start with `shopping_list`
+      - type of `shopping_list` is in fact a reference
+      - threads can't close over a reference
+        - try to remove the clone, see what happens
+    - what about `name`?
+      - `name` is needed because `store` is moved into
+  - how do we parallelize?
+    - we have to start ALL the threads before we join ANY of them
+- 
+- Shared memory exercise
+  - Afterwards:
+    - show how you can change so that we request an
+      `Vec<ShoppingList>` instead of `&Vec`, note that in general if
+      you will consume data, it's best to take it by value, and let
+      the owner clone if they must
+    - note that this applies equally well when using channels,
+      and in fact a common pattern is to send an `Arc<T>` over a channel
+-       
