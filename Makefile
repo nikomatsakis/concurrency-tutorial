@@ -1,2 +1,2 @@
-index.html: index-template.html sync-index.py
-	python sync-index.py < index-template.html > index.html
+index.html: index-template.md sync-index.py
+	markdown index-template.md | python sync-index.py > index.html
