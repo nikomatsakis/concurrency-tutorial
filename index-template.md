@@ -7,14 +7,14 @@
     - Goal: convert this code to use borrowing instead so that it compiles
     - Time: 3 minutes
 - [Sequential search](src/sequential_search.rs):    
-    - Goal: implement <code>find_best_store</code>
+    - Goal: implement `find_best_store`
     - Time: 10 minutes
 - [Parallel search](src/parallel_search.rs):
     - Goal: make this actually run in parallel
     - Hint: you will have to stop cloning the store name
     - Time: 10 minutes
 - [Channels](src/channels.rs):    
-    - Goal: modify parallel <code>find_best_store</code> to use channels
+    - Goal: modify parallel `find_best_store` to use channels
     - Extra bonus: modify to make each store an actor and use RPC 
     - Time: 10 minutes
 - [Shared memory](src/shared_memory.rs):
