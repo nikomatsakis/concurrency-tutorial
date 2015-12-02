@@ -1,46 +1,35 @@
-mod example00;
-mod example01;
-mod example02;
-mod example03;
-mod example_sequential_search;
-mod example_parallel_search;
-mod example_parallel_search_sol;
-mod example_channels;
-mod example_channels_sol;
-mod example_actor;
-mod example_shared_memory;
-mod example_mutex;
+mod hello_world;
+// mod borrowing; not expected to compile
+mod sequential_search;
+mod parallel_search;
+mod parallel_search_sol;
+mod channels;
+mod channels_sol;
+mod actor;
+mod shared_memory;
+mod mutex;
 
 fn main() {
     println!("----------------------------------------------------------------------");
-    example00::main();
+    hello_world::main();
 
     println!("----------------------------------------------------------------------");
-    example01::main();
+    sequential_search::main();
 
     println!("----------------------------------------------------------------------");
-    example02::main();
+    parallel_search::main();
+    parallel_search_sol::main();
 
     println!("----------------------------------------------------------------------");
-    example03::main();
+    // channels::main(); // not expected to execute
+    channels_sol::main();
 
     println!("----------------------------------------------------------------------");
-    example_sequential_search::main();
+    actor::main();
 
     println!("----------------------------------------------------------------------");
-    example_parallel_search::main();
-    example_parallel_search_sol::main();
+    shared_memory::main();
 
     println!("----------------------------------------------------------------------");
-    // example_channels::main(); // not expected to execute
-    example_channels_sol::main();
-
-    println!("----------------------------------------------------------------------");
-    example_actor::main();
-
-    println!("----------------------------------------------------------------------");
-    example_shared_memory::main();
-
-    println!("----------------------------------------------------------------------");
-    example_mutex::main();
+    mutex::main();
 }

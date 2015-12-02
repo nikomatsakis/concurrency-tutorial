@@ -64,14 +64,14 @@ fn find_best_store(stores: Vec<Store>, shopping_list: &Vec<String>) -> String {
         let shopping_list = shopping_list.clone();
         thread::spawn(move || {
             let sum = compute_sum(&store, &shopping_list);
-            unimplemented!("send sum to some channel");
+            unimplemented!(); // send `sum` and `store.name` over channel
         });
     }
 
     let mut best = None;
     let mut best_price = INFINITY;
-    while true { // <-- change to some suitable loop!
-        let (sum, name) = unimplemented!();
+    loop { // <-- change to some suitable loop!
+        let (sum, name) = unimplemented!(); // receive `sum` and `name` from channel
         if sum < best_price {
             best = Some(name);
             best_price = sum;
