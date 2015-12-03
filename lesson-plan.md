@@ -40,7 +40,6 @@
       - `name` is needed because `store` is moved into
   - how do we parallelize?
     - we have to start ALL the threads before we join ANY of them
-- 
 - Shared memory exercise
   - Afterwards:
     - show how you can change so that we request an
@@ -49,4 +48,3 @@
       the owner clone if they must
     - note that this applies equally well when using channels,
       and in fact a common pattern is to send an `Arc<T>` over a channel
--       
